@@ -55,6 +55,10 @@ local ArgumentTypes = {
 		
 		return "Command not found or nil", true
 	end,
+	
+	botindex = function(Runner: Player)
+		return BotIndex
+	end,
 }
 
 function debug_style(Type: string, FunctionName: string, ...)
