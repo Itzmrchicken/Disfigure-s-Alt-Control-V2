@@ -20,7 +20,7 @@ local Commands = {
 		
 		Run = function(Runner: Player, Data)
 			local BotIndex: number = Data.botindex
-			local Target: Player = Data.Player
+			local Target: Player = Data.player
 			
 			local LPCharacter = LocalPlayer.Character
 			
