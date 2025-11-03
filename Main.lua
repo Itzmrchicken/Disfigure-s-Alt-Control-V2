@@ -70,7 +70,7 @@ function verify_all_bots()
 		if not PlayersService:FindFirstChild(bot) then
 			table.remove(Bots, table.find(Bots, bot))
 			
-			print(bot, "doesn't exist in-game")
+			warn(debug_style("WARN", "main() => verify_all_bots()", bot.." doesn't exist in-game"))
 		end
 	end
 	
@@ -106,8 +106,6 @@ function grab_args(Runner: Player, Command: string, Arguments)
 			local Aliases = cmd_data.Aliases
 						
 			if table.find(Aliases, Command) then
-				print("Found command")
-				
 				for Index, Arg in cmd_data.Args do
 					local ArgumentData, IsError = ArgumentTypes[Arg](Runner, Arg, Index, Arguments[Index], cmd_data)
 
@@ -126,9 +124,7 @@ function grab_args(Runner: Player, Command: string, Arguments)
 			end
 		end
 	end
-	
-	print(HttpService:JSONEncode(CmdArgs))
-	
+		
 	return CommandData, CmdArgs
 end
 
@@ -155,7 +151,7 @@ function register_command(Runner: Player, Text: string)
 		if CommandArgs and next(CommandArgs) then
 			local Status = run_command(Runner, CommandData, CommandArgs)
 			
-			print(Status)
+			print(debug_style("INFO", "main() => register_command()", "Command status: "..(Status and "Completed") or "Failed"))
 		end
 	elseif Command and not next(Arguments) then
 		warn(debug_style("WARN", "register_command() ~> grab_args", "Can't run command in general. No args"))
