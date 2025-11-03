@@ -7,3 +7,7 @@ I didn't feel like deleting and then adding files to the original repository, so
 # Debugging Errors or Warnings
 
 ---
+
+#### Common, but easy to fix error. When executing commands, provide the correct arguments
+
+![Bad Arguments PNG](/images/BadArgs.PNG "Image of incorrect / bad arguments for a command")
