@@ -165,7 +165,7 @@ return function()
 	
 	verify_all_bots()
 		
-	TextChatService.MessageReceived:Once(function(message)
+	TextChatService.MessageReceived:Connect(function(message)
 		local PlayerMessage: Player = PlayersService:FindFirstChild(message.TextSource.Name)
 		
 		if IsDisplayName and PlayerMessage.DisplayName == Master or PlayerMessage.Name == Master then
