@@ -4,8 +4,8 @@ local Commands = {
 		
 		Args = {"player"},
 		
-		Run = function(Args)
-			print(Args)
+		Run = function(Runner: Player, ...)
+			print(Runner, ...)
 		end,
 	}
 }
