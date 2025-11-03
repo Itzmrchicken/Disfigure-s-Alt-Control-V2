@@ -1,3 +1,5 @@
+local HttpService = game:GetService("HttpService")
+
 local Commands = {
 	teleport = {
 		Aliases = {"goto", "to", "tp"},
@@ -5,7 +7,7 @@ local Commands = {
 		Args = {"player"},
 		
 		Run = function(Runner: Player, ...)
-			print(Runner, ...)
+			print(Runner, HttpService:JSONEncode(...))
 		end,
 	}
 }
