@@ -127,6 +127,8 @@ function grab_args(Runner: Player, Command: string, Arguments)
 		end
 	end
 	
+	print(HttpService:JSONEncode(CmdArgs))
+	
 	return CommandData, CmdArgs
 end
 
@@ -161,6 +163,8 @@ function register_command(Runner: Player, Text: string)
 end
 
 return function()
+	print(debug_style("INFO", "main()", "Loading script on Master and Bot . . ."))
+	
 	if AccountIsMaster then return account_master() end
 	
 	verify_all_bots()
