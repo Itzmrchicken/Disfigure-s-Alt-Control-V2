@@ -50,6 +50,21 @@ local Commands = {
 			
 			FunctionsModule.Chat(1, BotIndex, Data.command)
 		end,
+	},
+	
+	chat = {
+		Aliases = {"say", "msg"},
+		
+		Args = {"message", "botindex"},
+		
+		Definition = "Makes all bots chat a provided message",
+		
+		Run = function(Runner: Player, Data)
+			local BotIndex = Data.botindex
+			local Message = Data.message
+			
+			FunctionsModule.Chat(nil, BotIndex, Message)
+		end,
 	}
 }
 
