@@ -73,6 +73,10 @@ local ArgumentTypes = {
 	none = function(Runner: Player, Data)
 		return true
 	end,
+	
+	word = function(Runner: Player, Data)
+		return Data.ArgText
+	end,
 }
 
 function debug_style(Type: string, FunctionName: string, ...)
