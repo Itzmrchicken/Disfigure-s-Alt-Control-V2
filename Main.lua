@@ -69,6 +69,10 @@ local ArgumentTypes = {
 		
 		return OriginalMessage
 	end,
+	
+	none = function(Runner: Player, Data)
+		return true
+	end,
 }
 
 function debug_style(Type: string, FunctionName: string, ...)
@@ -173,7 +177,7 @@ function register_command(Runner: Player, Text: string)
 	
 	if not Command then return end
 	
-	if Command and next(Arguments) then
+	if Command and Arguments then
 		local CommandData, CommandArgs = grab_args(Runner, Command, Arguments, {
 			OriginalMessage = get_original_message(Arguments)
 		})
@@ -183,8 +187,8 @@ function register_command(Runner: Player, Text: string)
 			
 			print(debug_style("INFO", "main() => register_command()", "Command status: "..(Status and "Completed") or "Failed"))
 		end
-	elseif Command and not next(Arguments) then
-		warn(debug_style("WARN", "register_command() ~> grab_args", "Can't run command in general. No args"))
+	--elseif Command and not next(Arguments) then
+	--	warn(debug_style("WARN", "register_command() ~> grab_args", "Can't run command in general. No args"))
 	end
 end
 
