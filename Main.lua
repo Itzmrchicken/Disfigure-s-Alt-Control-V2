@@ -77,6 +77,10 @@ local ArgumentTypes = {
 	word = function(Runner: Player, Data)
 		return Data.ArgText
 	end,
+	
+	number = function(Runner: Player, Data)
+		return tonumber(Data.ArgText)
+	end,
 }
 
 function debug_style(Type: string, FunctionName: string, ...)
