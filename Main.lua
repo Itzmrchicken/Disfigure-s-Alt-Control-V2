@@ -26,7 +26,9 @@ local CustomArgs = {
 }
 
 local ArgumentTypes = {
-	player = function(Runner: Player, ArgString: string, Index: number, ArgText: string)
+	player = function(Runner: Player, Data)
+		local ArgText = Data.ArgText
+		
 		for _, player in PlayersService:GetPlayers() do
 			if ArgText and (player.Name:lower():sub(1, #ArgText) == ArgText or player.DisplayName:lower():sub(1, #ArgText) == ArgText) then
 				return player
@@ -40,7 +42,9 @@ local ArgumentTypes = {
 		return "Player not found or nil", true
 	end,
 	
-	command = function(Runner: Player, ArgString: string, Index: number, ArgText: string)
+	command = function(Runner: Player, Data)
+		local ArgText = Data.ArgText
+		
 		if CommandsModule[ArgText] then
 			return CommandsModule[ArgText].Definition
 		else
@@ -58,6 +62,12 @@ local ArgumentTypes = {
 	
 	botindex = function(Runner: Player)
 		return BotIndex
+	end,
+	
+	message = function(Runner: Player, Data)
+		local OriginalMessage = Data.OriginalMessage
+		
+		return OriginalMessage
 	end,
 }
 
@@ -81,7 +91,7 @@ function account_master()
 	print(debug_style("INFO", "account_master()", "Account is master"))
 end
 
-function grab_args(Runner: Player, Command: string, Arguments)
+function grab_args(Runner: Player, Command: string, Arguments, Data)
 	local CommandData = {}
 	local CmdArgs = {}
 	
@@ -91,7 +101,13 @@ function grab_args(Runner: Player, Command: string, Arguments)
 		CommandData = CommandsModule[Command]
 		
 		for Index, Arg in CommandsModule[Command].Args do
-			local ArgumentData, IsError = ArgumentTypes[Arg](Runner, Arg, Index, Arguments[Index], CommandsModule[Command])
+			local ArgumentData, IsError = ArgumentTypes[Arg](Runner, {
+				Arg = Arg,
+				Index = Index,
+				ArgText = Arguments[Index],
+				Arguments = Arguments,
+				OriginalMessage = Data.OriginalMessage
+			})
 			
 			if ArgumentData and not IsError then
 				CmdArgs[Arg] = ArgumentData
@@ -107,7 +123,11 @@ function grab_args(Runner: Player, Command: string, Arguments)
 						
 			if table.find(Aliases, Command) then
 				for Index, Arg in cmd_data.Args do
-					local ArgumentData, IsError = ArgumentTypes[Arg](Runner, Arg, Index, Arguments[Index], cmd_data)
+					local ArgumentData, IsError = ArgumentTypes[Arg](Runner, {
+						Arg = Arg,
+						Index = Index,
+						ArgText = Arguments[Index]
+					})
 
 					if ArgumentData and not IsError then
 						CmdArgs[Arg] = ArgumentData
@@ -124,6 +144,8 @@ function grab_args(Runner: Player, Command: string, Arguments)
 			end
 		end
 	end
+	
+	--print(HttpService:JSONEncode(CmdArgs))
 		
 	return CommandData, CmdArgs
 end
@@ -138,6 +160,10 @@ function run_command(Runner: Player, CommandData, Arguments)
 	return
 end
 
+function get_original_message(SubStrings: {})
+	return table.concat(SubStrings, " ")
+end
+
 function register_command(Runner: Player, Text: string)
 	local Split = Text:split(" ")
 	
@@ -148,7 +174,9 @@ function register_command(Runner: Player, Text: string)
 	if not Command then return end
 	
 	if Command and next(Arguments) then
-		local CommandData, CommandArgs = grab_args(Runner, Command, Arguments)
+		local CommandData, CommandArgs = grab_args(Runner, Command, Arguments, {
+			OriginalMessage = get_original_message(Arguments)
+		})
 		
 		if CommandArgs and next(CommandArgs) then
 			local Status = run_command(Runner, CommandData, CommandArgs)
