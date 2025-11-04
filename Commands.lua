@@ -100,7 +100,7 @@ local Commands = {
 			
 			local Args = get_command_data(Command).Args
 			
-			print(HttpService:JSONEncode(Args))
+			--print(HttpService:JSONEncode(Args))
 			
 			FunctionsModule.Chat(1, BotIndex, Command..": "..table.concat(Args, " "))
 		end,
