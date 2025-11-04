@@ -145,6 +145,8 @@ function register_command(Runner: Player, Text: string)
 	
 	local Arguments = table.remove(Split, 1) and Split
 	
+	if not Command then return end
+	
 	if Command and next(Arguments) then
 		local CommandData, CommandArgs = grab_args(Runner, Command, Arguments)
 		
