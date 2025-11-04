@@ -127,12 +127,12 @@ local Commands = {
 		Run = function(Runner: Player, Data)
 			local BotIndex = Data.botindex
 			local Command = Data.word
-			
-			--print(HttpService:JSONEncode(Data))
-			
+						
 			local Command_Data = get_command_data(Command)
-			
-			--print(Command_Data and HttpService:JSONEncode(Command_Data))
+						
+			if not next(Command_Data) then
+				return
+			end
 			
 			FunctionsModule.Chat(1, BotIndex, Command..": "..table.concat(Command_Data.Args, " "))
 		end,
