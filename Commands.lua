@@ -112,8 +112,10 @@ local Commands = {
 				
 				local HumanoidRootPart: BasePart = Character and Character:FindFirstChild("HumanoidRootPart")
 				
-				if LPHumanoidRootPart and HumanoidRootPart then
-					LPHumanoidRootPart.CFrame = HumanoidRootPart.CFrame * CFrame.new(math.random(-15, 15), math.random(-15, 15), math.random(-15, 15))
+				local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
+				
+				if LPHumanoidRootPart and HumanoidRootPart and Humanoid then
+					LPHumanoidRootPart.CFrame = HumanoidRootPart.CFrame * CFrame.new(Humanoid.MoveDirection) * CFrame.new(math.random(-15, 15), math.random(-15, 15), math.random(-15, 15))
 				end
 			end)
 		end,
