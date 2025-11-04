@@ -123,7 +123,7 @@ function get_command_data(Command)
 		end
 	end
 
-	return "Couldn't find command "..Command, true
+	return "Couldn't find command", true
 end
 
 return Commands
