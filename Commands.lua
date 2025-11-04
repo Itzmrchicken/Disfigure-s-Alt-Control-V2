@@ -83,7 +83,7 @@ local Commands = {
 	args = {
 		Aliases = {},
 		
-		Args = {"command", "botindex"},
+		Args = {"word", "botindex"},
 		
 		Definition = "Gives required arguments for provided command",
 		
