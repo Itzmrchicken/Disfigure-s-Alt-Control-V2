@@ -150,6 +150,18 @@ local Commands = {
 		end,
 	},
 	
+	reset = {
+		Aliases = {"res", "rb"},
+		
+		Args = {"none"},
+		
+		Definition = "Resets the bots",
+		
+		Run = function(Runner: Player, Data)
+			LocalPlayer.Character:FindFirstChildOfClass("Humanoid").Health = 0
+		end,
+	},
+	
 	commands = {
 		Aliases = {"cmds"},
 		
