@@ -93,7 +93,27 @@ local Commands = {
 		Definition = "Makes the bots swarm a provided player like bugs",
 		
 		Run = function(Runner: Player, Data)
+			local Target: Player = Data.player
 			
+			if RunService.Swarm then
+				RunService.Swarm:Disconnect()
+				
+				return
+			end
+			
+			RunService["Swarm"] = RunService.Heartbeat:Connect(function()
+				local LPCharacter = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+				
+				local Character = Target.Character or Target.CharacterAdded:Wait()
+				
+				local LPHumanoidRootPart: BasePart = LPCharacter and LPCharacter:FindFirstChild("HumanoidRootPart")
+				
+				local HumanoidRootPart: BasePart = Character and Character:FindFirstChild("HumanoidRootPart")
+				
+				if LPHumanoidRootPart and HumanoidRootPart then
+					LPHumanoidRootPart.CFrame = HumanoidRootPart.CFrame * CFrame.new(math.random(-5, 5), math.random(-5, 5), math.random(-5, 5))
+				end
+			end)
 		end,
 	},
 	
@@ -110,11 +130,11 @@ local Commands = {
 			
 			print(HttpService:JSONEncode(Data))
 			
-			local Args = get_command_data(Command)
+			local Command_Data = get_command_data(Command)
 			
-			print(Args and HttpService:JSONEncode(Args))
+			print(Command_Data and HttpService:JSONEncode(Command_Data))
 			
-			FunctionsModule.Chat(1, BotIndex, Command..": "..table.concat(Args, " "))
+			FunctionsModule.Chat(1, BotIndex, Command..": "..table.concat(Command_Data.Args, " "))
 		end,
 	},
 	
