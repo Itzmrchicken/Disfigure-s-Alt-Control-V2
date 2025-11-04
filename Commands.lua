@@ -85,6 +85,18 @@ local Commands = {
 		end,
 	},
 	
+	swarm = {
+		Aliases = {"swm", "surround"},
+		
+		Args = {"player"},
+		
+		Definition = "Makes the bots swarm a provided player like bugs",
+		
+		Run = function(Runner: Player, Data)
+			
+		end,
+	},
+	
 	args = {
 		Aliases = {},
 		
@@ -98,7 +110,7 @@ local Commands = {
 			
 			print(HttpService:JSONEncode(Data))
 			
-			local Args = get_command_data(Command).Args
+			local Args = get_command_data(Command)
 			
 			--print(HttpService:JSONEncode(Args))
 			
@@ -121,12 +133,15 @@ local Commands = {
 
 function get_command_data(Command)
 	if Commands[Command] then
+		print(HttpService:JSONEncode(Commands[Command]))
+		
 		return Commands[Command]
 	else
 		for cmd, cmd_data in Commands do
 			local Aliases = cmd_data.Aliases
 
 			if table.find(Aliases, Command) then
+				print(HttpService:JSONEncode(cmd_data))
 				return cmd_data
 			end
 		end
