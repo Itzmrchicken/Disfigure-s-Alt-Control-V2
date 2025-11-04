@@ -91,11 +91,27 @@ local Commands = {
 			local BotIndex = Data.botindex
 			local Command = Data.command
 			
-			local Args = FunctionsModule.CommandData(Command).Args
+			local Args = get_command_data(Data)
 			
 			FunctionsModule.Chat(1, BotIndex, Command..": "..table.concat(Args, " "))
 		end,
 	}
 }
+
+function get_command_data(Command)
+	if Commands[Command] then
+		return Commands[Command]
+	else
+		for cmd, cmd_data in Commands do
+			local Aliases = cmd_data.Aliases
+
+			if table.find(Aliases, Command) then
+				return cmd_data
+			end
+		end
+	end
+
+	return "Couldn't find command "..Command, true
+end
 
 return Commands
