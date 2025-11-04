@@ -135,7 +135,7 @@ local Commands = {
 			end
 			
 			if table.find(Command_Data.Args, "botindex") then
-				table.remove(table.find(Command_Data.Args, "botindex"))
+				table.remove(Command_Data.Args, table.find(Command_Data.Args, "botindex"))
 			end
 			
 			FunctionsModule.Chat(1, BotIndex, Command..": "..table.concat(Command_Data.Args, " "))
