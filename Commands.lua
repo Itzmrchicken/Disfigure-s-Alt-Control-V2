@@ -91,6 +91,8 @@ local Commands = {
 			local BotIndex = Data.botindex
 			local Command = Data.command
 			
+			print(HttpService:JSONEncode(Data))
+			
 			local Args = get_command_data(Command).Args
 			
 			print(HttpService:JSONEncode(Args))
