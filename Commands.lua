@@ -1,3 +1,4 @@
+local TeleportService = game:GetService("TeleportService")
 local HttpService = game:GetService("HttpService")
 local PlayersService = game:GetService("Players")
 
@@ -64,6 +65,35 @@ local Commands = {
 			local Message = Data.message
 			
 			FunctionsModule.Chat(nil, BotIndex, Message)
+		end,
+	},
+	
+	rejoin = {
+		Aliases = {"rj", "rej", "botrj"},
+		
+		Args = {},
+		
+		Definition = "Makes all bots rejoin the current server",
+		
+		Run = function(Runner: Player, Data)
+			TeleportService:TeleportToPlaceInstance(game.PlaceId, game.JobId, LocalPlayer)
+		end,
+	},
+	
+	args = {
+		Aliases = {},
+		
+		Args = {"command", "botindex"},
+		
+		Definition = "Gives required arguments for provided command",
+		
+		Run = function(Runner: Player, Data)
+			local BotIndex = Data.botindex
+			local Command = Data.command
+			
+			local Args = FunctionsModule.CommandData(Command).Args
+			
+			FunctionsModule.Chat(1, BotIndex, Command..": "..table.concat(Args, " "))
 		end,
 	}
 }
