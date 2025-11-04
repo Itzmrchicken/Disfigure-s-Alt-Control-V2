@@ -95,6 +95,18 @@ local Commands = {
 			
 			FunctionsModule.Chat(1, BotIndex, Command..": "..table.concat(Args, " "))
 		end,
+	},
+	
+	leave = {
+		Aliases = {"lv", "getout"},
+		
+		Args = {"none"},
+		
+		Definition = "Kicks the bots from the game",
+		
+		Run = function(Runner: Player, Data)
+			LocalPlayer:Kick("Master kicked bots")
+		end,
 	}
 }
 
