@@ -98,6 +98,8 @@ local Commands = {
 			if Connections.RunService.Swarm then
 				Connections.RunService.Swarm:Disconnect()
 				
+				Connections.RunService.Swarm = nil
+				
 				return
 			end
 			
@@ -111,7 +113,7 @@ local Commands = {
 				local HumanoidRootPart: BasePart = Character and Character:FindFirstChild("HumanoidRootPart")
 				
 				if LPHumanoidRootPart and HumanoidRootPart then
-					LPHumanoidRootPart.CFrame = HumanoidRootPart.CFrame * CFrame.new(math.random(-5, 5), math.random(-5, 5), math.random(-5, 5))
+					LPHumanoidRootPart.CFrame = HumanoidRootPart.CFrame * CFrame.new(math.random(-15, 15), math.random(-15, 15), math.random(-15, 15))
 				end
 			end)
 		end,
