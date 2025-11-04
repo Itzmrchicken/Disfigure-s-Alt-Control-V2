@@ -134,6 +134,10 @@ local Commands = {
 				return
 			end
 			
+			if table.find(Command_Data.Args, "botindex") then
+				table.remove(table.find(Command_Data.Args, "botindex"))
+			end
+			
 			FunctionsModule.Chat(1, BotIndex, Command..": "..table.concat(Command_Data.Args, " "))
 		end,
 	},
@@ -151,7 +155,7 @@ local Commands = {
 	},
 	
 	reset = {
-		Aliases = {"res", "rb"},
+		Aliases = {"res", "rb", "re"},
 		
 		Args = {"none"},
 		
