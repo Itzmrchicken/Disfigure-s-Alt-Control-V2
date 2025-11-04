@@ -95,13 +95,13 @@ local Commands = {
 		Run = function(Runner: Player, Data)
 			local Target: Player = Data.player
 			
-			if RunService.Swarm then
-				RunService.Swarm:Disconnect()
+			if Connections.RunService.Swarm then
+				Connections.RunService.Swarm:Disconnect()
 				
 				return
 			end
 			
-			RunService["Swarm"] = RunService.Heartbeat:Connect(function()
+			Connections.RunService["Swarm"] = RunService.Heartbeat:Connect(function()
 				local LPCharacter = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
 				
 				local Character = Target.Character or Target.CharacterAdded:Wait()
@@ -128,11 +128,11 @@ local Commands = {
 			local BotIndex = Data.botindex
 			local Command = Data.word
 			
-			print(HttpService:JSONEncode(Data))
+			--print(HttpService:JSONEncode(Data))
 			
 			local Command_Data = get_command_data(Command)
 			
-			print(Command_Data and HttpService:JSONEncode(Command_Data))
+			--print(Command_Data and HttpService:JSONEncode(Command_Data))
 			
 			FunctionsModule.Chat(1, BotIndex, Command..": "..table.concat(Command_Data.Args, " "))
 		end,
@@ -147,6 +147,18 @@ local Commands = {
 		
 		Run = function(Runner: Player, Data)
 			LocalPlayer:Kick("Master kicked bots")
+		end,
+	},
+	
+	commands = {
+		Aliases = {"cmds"},
+		
+		Args = {"number"},
+		
+		Definition = "Shows the list of commands",
+		
+		Run = function(Runner: Player, Data)
+			
 		end,
 	}
 }
