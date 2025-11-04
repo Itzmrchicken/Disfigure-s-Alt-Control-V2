@@ -71,7 +71,7 @@ local Commands = {
 	rejoin = {
 		Aliases = {"rj", "rej", "botrj"},
 		
-		Args = {},
+		Args = {"none"},
 		
 		Definition = "Makes all bots rejoin the current server",
 		
