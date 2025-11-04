@@ -91,7 +91,7 @@ local Commands = {
 			local BotIndex = Data.botindex
 			local Command = Data.command
 			
-			local Args = get_command_data(Command)
+			local Args = get_command_data(Command).Args
 			
 			FunctionsModule.Chat(1, BotIndex, Command..": "..table.concat(Args, " "))
 		end,
