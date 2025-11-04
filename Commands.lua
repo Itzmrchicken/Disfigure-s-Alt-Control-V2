@@ -1,6 +1,7 @@
 local TeleportService = game:GetService("TeleportService")
 local HttpService = game:GetService("HttpService")
 local PlayersService = game:GetService("Players")
+local RunService = game:GetService("RunService")
 
 local LocalPlayer = PlayersService.LocalPlayer
 
@@ -10,6 +11,10 @@ local Data = getgenv().Data
 
 local Master = Data["Master"]
 local Bots = Data["Bots"]
+
+local Connections = {
+	RunService = {}
+}
 
 local Commands = {
 	teleport = {
@@ -89,7 +94,7 @@ local Commands = {
 		
 		Run = function(Runner: Player, Data)
 			local BotIndex = Data.botindex
-			local Command = Data.command
+			local Command = Data.word
 			
 			print(HttpService:JSONEncode(Data))
 			
