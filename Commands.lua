@@ -267,14 +267,23 @@ local Commands = {
 	commands = {
 		Aliases = {"cmds"},
 		
-		Args = {"number"},
+		Args = {"number", "botindex"},
 		
 		Definition = "Shows the list of commands",
 		
 		Run = function(Runner: Player, Data)
+			local Page = Data.number
+			local BotIndex = Data.botindex
 			
+			local Pages = get_commands_pages()
+			
+			if Pages[Page] then
+				FunctionsModule.Chat(1, BotIndex, "Commands for page "..Page..": "..table.concat(Pages[Page], " "))
+			else
+				FunctionsModule.Chat(1, BotIndex, "Can't go to that page. Current amount of pages are "..#Pages)
+			end
 		end,
-	}
+	},
 }
 
 function get_command_data(Command)
@@ -294,6 +303,32 @@ function get_command_data(Command)
 	end
 
 	return "Couldn't find command", true
+end
+
+function count_table(Table)
+	local Count = 0
+	
+	for _, _ in Table do
+		Count += 1
+	end
+	
+	return Count
+end
+
+function get_commands_pages()
+	local Groups = {}
+	
+	for i = 1, count_table(Commands), 5 do
+		local Group = {}
+		
+		for j = i, math.min(i + 5 - 1, count_table(Commands)) do
+			table.insert(Group, Commands[j])
+		end
+		
+		table.insert(Groups, Group)
+	end
+	
+	return Groups
 end
 
 return Commands
