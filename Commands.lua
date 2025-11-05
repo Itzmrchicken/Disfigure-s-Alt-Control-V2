@@ -352,6 +352,62 @@ local Commands = {
 				end
 			end)
 		end,
+	},
+	
+	fling = {
+		Aliases = {"skyrocket", "moon"},
+		
+		Args = {"player"},
+		
+		Definition = "Flings a provided player",
+		
+		Run = function(Runner: Player, Data)
+			local Target: Player = Data.player
+			
+			local BodyAngularVelocity = Instance.new("BodyAngularVelocity")
+			BodyAngularVelocity.MaxTorque = Vector3.new(0, math.huge, 0)
+			BodyAngularVelocity.AngularVelocity = Vector3.new(0, 0, 0)
+			BodyAngularVelocity.P = math.huge
+			
+			if Connections.RunService.Fling then
+				Connections.RunService.Fling:Disconnect()
+				
+				Connections.RunService.Fling = nil
+				
+				workspace.Gravity = BaseValues.GameGravity
+				
+				return
+			end
+			
+			workspace.Gravity = 0
+			
+			for _, connection in Connections.RunService do
+				connection:Disconnect()
+
+				connection = nil
+			end
+			
+			local LPCharacter = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+			
+			local LPHumanoidRootPart: BasePart = LPCharacter and LPCharacter:FindFirstChild("HumanoidRootPart")
+			
+			BodyAngularVelocity.Parent = LPHumanoidRootPart
+			
+			Connections.RunService.Fling = RunService.Heartbeat:Connect(function()
+				local Character = Target.Character or Target.CharacterAdded:Wait()
+				
+				LPCharacter = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+				
+				local HumanoidRootPart: BasePart = Character and Character:FindFirstChild("HumanoidRootPart")
+				
+				LPHumanoidRootPart = LPCharacter and LPCharacter:FindFirstChild("HumanoidRootPart")
+				
+				LPHumanoidRootPart.AssemblyLinearVelocity = Vector3.new(6e6, 6e6, 6e6)
+				LPHumanoidRootPart.AssemblyAngularVelocity = Vector3.new(0, 6e6, 0)
+				
+				LPHumanoidRootPart.CFrame = HumanoidRootPart.CFrame * CFrame.new(0, 0, math.random(-10, 10))
+			end)
+		end,
 	}
 	
 	--aliases = {
