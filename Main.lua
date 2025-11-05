@@ -206,6 +206,8 @@ return function()
 	if AccountIsMaster then return account_master() end
 	
 	verify_all_bots()
+	
+	UserSettings():GetService("UserGameSettings").MasterVolume = 0
 		
 	TextChatService.MessageReceived:Connect(function(message)
 		local PlayerMessage: Player = PlayersService:FindFirstChild(message.TextSource.Name)
