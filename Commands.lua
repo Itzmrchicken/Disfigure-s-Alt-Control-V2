@@ -14,7 +14,7 @@ local Bots = Data["Bots"]
 
 local Connections = {
 	RunService = {}
-},
+}
 
 local BaseValues = {
 	GameGravity = workspace.Gravity
