@@ -407,7 +407,7 @@ local Commands = {
 				LPHumanoidRootPart = LPCharacter and LPCharacter:FindFirstChild("HumanoidRootPart")
 				
 				LPHumanoidRootPart.AssemblyLinearVelocity = Vector3.new(6e6, 6e6, 6e6)
-				--LPHumanoidRootPart.AssemblyAngularVelocity = Vector3.new(0, 6e6, 0)
+				LPHumanoidRootPart.AssemblyAngularVelocity = Vector3.new(0, 6e6, 0)
 				
 				LPHumanoidRootPart.CFrame = HumanoidRootPart.CFrame * CFrame.new(0, 0, math.random(-10, 10))
 			end)
