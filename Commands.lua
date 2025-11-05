@@ -445,7 +445,7 @@ local Commands = {
 				
 				--task.wait()
 				
-				if (Humanoid.Health <= 0) or not(Character) or LocalPlayer:DistanceFromCharacter(HumanoidRootPart.Position) > 100 then
+				if (Humanoid.Health <= 0) or not(Character) or (LPHumanoidRootPart.Position - HumanoidRootPart.Position).Magnitude >= 50 then
 					Connections.RunService.Fling:Disconnect()
 					
 					Connections.RunService.Fling = nil
