@@ -273,7 +273,7 @@ local Commands = {
 		
 		Run = function(Runner: Player, Data)
 			local BotIndex = Data.botindex
-			local Page = Data.number
+			local Page = Data.number or 1
 			
 			local Pages = get_commands_pages()
 			
@@ -284,6 +284,45 @@ local Commands = {
 			end
 		end,
 	},
+	
+	line = {
+		Aliases = {"ln"},
+		
+		Args = {"player", "botindex"},
+		
+		Definition = "Makes the bots form a line side-by-side next to provided player",
+		
+		Run = function(Runner: Player, Data)
+			local Target: Player = Data.player
+			local BotIndex = Data.botindex
+			
+			if Connections.RunService.Line then
+				Connections.RunService.Line:Disconnect()
+				
+				Connections.RunService.Line = nil
+				
+				workspace.Gravity = BaseValues.GameGravity
+				
+				return
+			end
+			
+			workspace.Gravity = 0
+			
+			Connections.RunService.Line = RunService.Heartbeat:Connect(function()
+				local Character = Target.Character or Target.CharacterAdded:Wait()
+				
+				local LPCharacter = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+				
+				local HumanoidRootPart: BasePart = Character and Character:FindFirstChild("HumanoidRootPart")
+				
+				local LPHumanoidRootPart: BasePart = LPCharacter and LPCharacter:FindFirstChild("HumanoidRootPart")
+				
+				if HumanoidRootPart and LPHumanoidRootPart then
+					LPHumanoidRootPart.CFrame = HumanoidRootPart.CFrame * CFrame.new(2 * BotIndex, 0, 0)
+				end
+			end)
+		end,
+	}
 	
 	--aliases = {
 	--	Aliases = {"ali", "als"},
