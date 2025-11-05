@@ -438,24 +438,22 @@ local Commands = {
 				
 				LPHumanoidRootPart = LPCharacter and LPCharacter:FindFirstChild("HumanoidRootPart")
 				
+				if (Humanoid.Health <= 0) or not(Character) or (LPHumanoidRootPart.Position - HumanoidRootPart.Position).Magnitude >= 25 then
+					Connections.RunService.Fling:Disconnect()
+
+					Connections.RunService.Fling = nil
+
+					workspace.Gravity = BaseValues.GameGravity
+
+					LPHumanoid.Health = 0
+
+					return
+				end
+				
 				LPHumanoidRootPart.AssemblyLinearVelocity = Vector3.new(math.huge, 0, math.huge)
 				LPHumanoidRootPart.AssemblyAngularVelocity = Vector3.new(0, 99999, 0)
 				
 				LPHumanoidRootPart.CFrame = HumanoidRootPart.CFrame * CFrame.new(0, 0, math.random(-10, 10)) + Humanoid.MoveDirection
-				
-				--task.wait()
-				
-				if (Humanoid.Health <= 0) or not(Character) or (LPHumanoidRootPart.Position - HumanoidRootPart.Position).Magnitude >= 50 then
-					Connections.RunService.Fling:Disconnect()
-					
-					Connections.RunService.Fling = nil
-					
-					workspace.Gravity = BaseValues.GameGravity
-					
-					LPHumanoid.Health = 0
-					
-					return
-				end
 			end)
 		end,
 	}
