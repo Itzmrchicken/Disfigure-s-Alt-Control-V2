@@ -147,7 +147,7 @@ local Commands = {
 			local BotIndex = Data.botindex
 			local Command = Data.word
 						
-			local Command_Data = get_command_data(Command)
+			local Command_Data = Command and get_command_data(Command)
 						
 			if not next(Command_Data) then
 				return
@@ -157,7 +157,7 @@ local Commands = {
 				table.remove(Command_Data.Args, table.find(Command_Data.Args, "botindex"))
 			end
 			
-			FunctionsModule.Chat(1, BotIndex, Command..": "..table.concat(Command_Data.Args, " "))
+			FunctionsModule.Chat(1, BotIndex, Command..": "..table.concat(Command_Data.Args, ", "))
 		end,
 	},
 	
@@ -272,8 +272,8 @@ local Commands = {
 		Definition = "Shows the list of commands",
 		
 		Run = function(Runner: Player, Data)
-			local Page = Data.number
 			local BotIndex = Data.botindex
+			local Page = Data.number
 			
 			local Pages = get_commands_pages()
 			
@@ -293,10 +293,12 @@ local Commands = {
 		Definition = "Gives the aliases or alternate commands to the parent command",
 		
 		Run = function(Runner: Player, Data)
-			local Command = Data.word
 			local BotIndex = Data.botindex
+			local Command = Data.word
 			
-			local Command_Data = get_command_data(Command)
+			print(Command)
+			
+			local Command_Data = Command and get_command_data(Command)
 			
 			if not next(Command_Data) then
 				return
