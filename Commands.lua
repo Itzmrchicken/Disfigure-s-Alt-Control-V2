@@ -14,6 +14,10 @@ local Bots = Data["Bots"]
 
 local Connections = {
 	RunService = {}
+},
+
+local BaseValues = {
+	GameGravity = workspace.Gravity
 }
 
 local Commands = {
@@ -100,8 +104,12 @@ local Commands = {
 				
 				Connections.RunService.Swarm = nil
 				
+				workspace.Gravity = BaseValues.GameGravity
+				
 				return
 			end
+			
+			workspace.Gravity = 0
 			
 			Connections.RunService["Swarm"] = RunService.Heartbeat:Connect(function()
 				local LPCharacter = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
@@ -173,6 +181,60 @@ local Commands = {
 		
 		Run = function(Runner: Player, Data)
 			LocalPlayer.Character:FindFirstChildOfClass("Humanoid").Health = 0
+		end,
+	},
+	
+	orbit = {
+		Aliases = {},
+		
+		Args = {"player", "botindex"},
+		
+		Definition = "Makes the bots orbit a provided player",
+		
+		Run = function(Runner: Player, Data)
+			local Target: Player = Data.player
+			local BotIndex = Data.botindex
+			
+			if Connections.RunService.Orbit then
+				Connections.RunService.Orbit:Disconnect()
+				
+				Connections.RunService.Orbit = nil
+				
+				workspace.Gravity = BaseValues.GameGravity
+				
+				return
+			end
+			
+			workspace.Gravity = 0
+			
+			local Speed = 1
+			local Radius = 10
+			local Spacing = Radius / #Bots
+			
+			local Rotation = 0
+			local RotationSpeed = math.pi * 2 / Speed
+			
+			Connections.RunService.Orbit = RunService.Heartbeat:Connect(function(DeltaTime)
+				local Character = Target.Character or Target.CharacterAdded:Wait()
+				
+				local LPCharacter = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+				
+				local HumanoidRootPart: BasePart = Character and Character:FindFirstChild("HumanoidRootPart")
+				
+				local LPHumanoidRootPart: BasePart = LPCharacter and LPCharacter:FindFirstChild("HumanoidRootPart")
+				
+				if HumanoidRootPart and LPHumanoidRootPart then
+					Rotation = Rotation + DeltaTime * RotationSpeed
+					
+					local Angle = Rotation - (BotIndex * Spacing)
+					
+					local X, Z = math.sin(Angle) * Radius, math.cos(Angle) * Radius
+					
+					local NewPosition = HumanoidRootPart.Position + Vector3.new(X, 0, Z)
+					
+					LPHumanoidRootPart.CFrame = CFrame.new(NewPosition, HumanoidRootPart.Position)
+				end
+			end)
 		end,
 	},
 	
