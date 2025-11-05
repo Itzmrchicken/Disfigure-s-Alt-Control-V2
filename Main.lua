@@ -219,6 +219,8 @@ return function()
 	print(debug_style("INFO", "main()", "Loading script on Master and Bot . . ."))
 	
 	if AccountIsMaster then return account_master() end
+	
+	Bots = getgenv().Data.Bots
 		
 	BotIndex = table.find(Bots, LocalPlayer.Name) and table.find(Bots, LocalPlayer.Name) or table.find(Bots, LocalPlayer.DisplayName)
 	
