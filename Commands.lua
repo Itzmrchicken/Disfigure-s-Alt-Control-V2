@@ -43,7 +43,7 @@ local Commands = {
 				local HumanoidRootPart: BasePart = Character:FindFirstChild("HumanoidRootPart")
 				
 				if LPHumanoidRootPart and HumanoidRootPart then
-					LPHumanoidRootPart.CFrame = HumanoidRootPart.CFrame * CFrame.new(0, 0, (1 * BotIndex))
+					LPHumanoidRootPart.CFrame = HumanoidRootPart.CFrame * CFrame.new(0, 0, (2 * BotIndex))
 				end
 			end
 		end,
@@ -203,7 +203,7 @@ local Commands = {
 			else
 				table.insert(Whitelist, PlayerToWhitelist.Name)
 				
-				FunctionsModule.Chat(1, BotIndex, PlayerToWhitelist.Name.." you have been ADDED to the whitelist to control us! Use .cmds to see current commands (cmds not working yet)")
+				FunctionsModule.Chat(1, BotIndex, PlayerToWhitelist.Name.." you have been ADDED to the whitelist to control us! Use .cmds to see current commands")
 			end
 			
 			getgenv().Data.Whitelist = Whitelist
@@ -278,10 +278,31 @@ local Commands = {
 			local Pages = get_commands_pages()
 			
 			if Pages[Page] then
-				FunctionsModule.Chat(1, BotIndex, "Commands for page "..Page..": "..table.concat(Pages[Page], ", "))
+				FunctionsModule.Chat(1, BotIndex, "Viewing commands for page "..Page.."/"..#Pages.." : "..table.concat(Pages[Page], ", "))
 			else
 				FunctionsModule.Chat(1, BotIndex, "Can't go to that page. Current amount of pages are "..#Pages)
 			end
+		end,
+	},
+	
+	aliases = {
+		Aliases = {"ali", "als"},
+		
+		Args = {"word", "botindex"},
+		
+		Definition = "Gives the aliases or alternate commands to the parent command",
+		
+		Run = function(Runner: Player, Data)
+			local Command = Data.word
+			local BotIndex = Data.botindex
+			
+			local Command_Data = get_command_data(Command)
+			
+			if not next(Command_Data) then
+				return
+			end
+			
+			FunctionsModule.Chat(1, BotIndex, "Aliases for "..Command..": "..table.concat(Command_Data.Aliases, ", "))
 		end,
 	},
 }
