@@ -105,8 +105,8 @@ function verify_all_bots()
 		end
 	end
 	
-	BotIndex = not AccountIsMaster and table.find(NewBots, LocalPlayer.Name)
-	
+	--BotIndex = not AccountIsMaster and table.find(NewBots, LocalPlayer.Name)
+		
 	Bots = NewBots
 	
 	getgenv().Data.Bots = NewBots
@@ -114,6 +114,8 @@ end
 
 function account_master()
 	print(debug_style("INFO", "account_master()", "Account is master"))
+	
+	verify_all_bots()
 end
 
 function grab_args(Runner: Player, Command: string, Arguments, Data)
@@ -217,8 +219,8 @@ return function()
 	print(debug_style("INFO", "main()", "Loading script on Master and Bot . . ."))
 	
 	if AccountIsMaster then return account_master() end
-	
-	verify_all_bots()
+		
+	BotIndex = table.find(Bots, LocalPlayer.Name) and table.find(Bots, LocalPlayer.Name) or table.find(Bots, LocalPlayer.DisplayName)
 	
 	UserSettings():GetService("UserGameSettings").MasterVolume = 0
 	UserSettings().GameSettings.SavedQualityLevel = Enum.SavedQualitySetting.QualityLevel1
