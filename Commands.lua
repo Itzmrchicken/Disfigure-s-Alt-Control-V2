@@ -443,7 +443,7 @@ local Commands = {
 				
 				LPHumanoidRootPart.CFrame = HumanoidRootPart.CFrame * CFrame.new(0, 0, math.random(-10, 10)) + Humanoid.MoveDirection
 				
-				task.wait()
+				--task.wait()
 				
 				if (Humanoid.Health <= 0) or not(Character) or LocalPlayer:DistanceFromCharacter(HumanoidRootPart.Position) > 100 then
 					Connections.RunService.Fling:Disconnect()
