@@ -208,6 +208,10 @@ return function()
 	verify_all_bots()
 	
 	UserSettings():GetService("UserGameSettings").MasterVolume = 0
+	UserSettings().GameSettings.SavedQualityLevel = Enum.SavedQualitySetting.QualityLevel1
+	
+	--UserSettings().GameSettings.StartMaximized = false
+	--UserSettings().GameSettings.MaxQuality = true
 		
 	TextChatService.MessageReceived:Connect(function(message)
 		local PlayerMessage: Player = PlayersService:FindFirstChild(message.TextSource.Name)
