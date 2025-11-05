@@ -441,10 +441,12 @@ local Commands = {
 				
 				LPHumanoidRootPart.CFrame = HumanoidRootPart.CFrame * CFrame.new(0, 0, math.random(-10, 10)) + Humanoid.MoveDirection
 				
-				if Humanoid.Health <= 0 or LocalPlayer:DistanceFromCharacter(HumanoidRootPart.Position) > 1000 then
+				if Humanoid.Health <= 0 or LocalPlayer:DistanceFromCharacter(HumanoidRootPart.Position) > 25 then
 					Connections.RunService.Fling:Disconnect()
 					
 					Connections.RunService.Fling = nil
+					
+					workspace.Gravity = BaseValues.GameGravity
 					
 					return
 				end
