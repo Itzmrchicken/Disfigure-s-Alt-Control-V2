@@ -443,9 +443,9 @@ local Commands = {
 				
 				LPHumanoidRootPart.CFrame = HumanoidRootPart.CFrame * CFrame.new(0, 0, math.random(-10, 10)) + Humanoid.MoveDirection
 				
-				task.wait(0.005)
+				task.wait(0.001)
 				
-				if (Humanoid.Health <= 0) or not(Character) or (LPHumanoidRootPart.Position - HumanoidRootPart.Position).Magnitude >= 50 then
+				if (Humanoid.Health <= 0) or not(Character) then
 					Connections.RunService.Fling:Disconnect()
 
 					Connections.RunService.Fling = nil
