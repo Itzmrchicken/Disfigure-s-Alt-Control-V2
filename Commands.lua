@@ -285,28 +285,28 @@ local Commands = {
 		end,
 	},
 	
-	aliases = {
-		Aliases = {"ali", "als"},
+	--aliases = {
+	--	Aliases = {"ali", "als"},
 		
-		Args = {"word", "botindex"},
+	--	Args = {"word", "botindex"},
 		
-		Definition = "Gives the aliases or alternate commands to the parent command",
+	--	Definition = "Gives the aliases or alternate commands to the parent command",
 		
-		Run = function(Runner: Player, Data)
-			local BotIndex = Data.botindex
-			local Command = Data.word
+	--	Run = function(Runner: Player, Data)
+	--		local BotIndex = Data.botindex
+	--		local Command = Data.word
 			
-			print(Command)
+	--		print(Command)
 			
-			local Command_Data = Command and get_command_data(Command)
+	--		local Command_Data = Command and get_command_data(Command)
 			
-			if not next(Command_Data) then
-				return
-			end
+	--		if not next(Command_Data) then
+	--			return
+	--		end
 			
-			FunctionsModule.Chat(1, BotIndex, "Aliases for "..Command..": "..table.concat(Command_Data.Aliases, ", "))
-		end,
-	},
+	--		FunctionsModule.Chat(1, BotIndex, "Aliases for "..Command..": "..table.concat(Command_Data.Aliases, ", "))
+	--	end,
+	--},
 }
 
 function get_command_data(Command)
