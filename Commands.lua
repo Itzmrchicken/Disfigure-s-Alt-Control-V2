@@ -368,11 +368,15 @@ local Commands = {
 			
 			for i, _ in Bots do
 				if i == BotIndex then
+					task.wait(BotIndex / 2)
+					
 					FunctionsModule.Chat(i, BotIndex, "I'm number "..BotIndex.."!")
 					
 					break
 				end
 			end
+			
+			task.wait(1)
 			
 			FunctionsModule.Chat(1, BotIndex, "Looks like everyone counted off right!")
 		end,
