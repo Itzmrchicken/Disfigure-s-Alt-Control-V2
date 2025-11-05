@@ -206,8 +206,6 @@ return function()
 	if AccountIsMaster then return account_master() end
 	
 	verify_all_bots()
-	
-	setfpscap(1)
 		
 	TextChatService.MessageReceived:Connect(function(message)
 		local PlayerMessage: Player = PlayersService:FindFirstChild(message.TextSource.Name)
