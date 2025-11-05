@@ -364,12 +364,11 @@ local Commands = {
 		Run = function(Runner: Player, Data)
 			local Target: Player = Data.player
 			
-			local BodyAngularVelocity = Instance.new("BodyAngularVelocity")
-			BodyAngularVelocity.MaxTorque = Vector3.new(0, math.huge, 0)
-			BodyAngularVelocity.AngularVelocity = Vector3.new(0, 0, 0)
-			BodyAngularVelocity.P = math.huge
-			
 			if Connections.RunService.Fling then
+				if LocalPlayer.Character:FindFirstChild("HumanoidRootPart"):FindFirstChildOfClass("BodyAngularVelocity") then
+					LocalPlayer.Character:FindFirstChild("HumanoidRootPart"):FindFirstChildOfClass("BodyAngularVelocity"):Destroy()
+				end
+				
 				Connections.RunService.Fling:Disconnect()
 				
 				Connections.RunService.Fling = nil
@@ -378,6 +377,11 @@ local Commands = {
 				
 				return
 			end
+			
+			local BodyAngularVelocity = Instance.new("BodyAngularVelocity")
+			BodyAngularVelocity.MaxTorque = Vector3.new(0, math.huge, 0)
+			BodyAngularVelocity.AngularVelocity = Vector3.new(0, 0, 0)
+			BodyAngularVelocity.P = math.huge
 			
 			workspace.Gravity = 0
 			
