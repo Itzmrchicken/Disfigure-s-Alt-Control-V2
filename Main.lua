@@ -23,20 +23,26 @@ local CustomArgs = {
 	me = function(Runner: Player)
 		return Runner
 	end,
+	
+	random = function(Runner: Player)
+		local Players = PlayersService:GetPlayers()
+		
+		return Players[math.random(1, #Players)]
+	end,
 }
 
 local ArgumentTypes = {
 	player = function(Runner: Player, Data)
 		local ArgText = Data.ArgText
 		
+		if CustomArgs[ArgText] then
+			return CustomArgs[ArgText](Runner)
+		end
+		
 		for _, player in PlayersService:GetPlayers() do
 			if ArgText and (player.Name:lower():sub(1, #ArgText) == ArgText or player.DisplayName:lower():sub(1, #ArgText) == ArgText) then
 				return player
 			end
-		end
-		
-		if CustomArgs[ArgText] then
-			return CustomArgs[ArgText](Runner)
 		end
 		
 		return "Player not found or nil", true
