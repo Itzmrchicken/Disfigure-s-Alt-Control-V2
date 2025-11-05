@@ -434,6 +434,8 @@ local Commands = {
 				
 				local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
 				
+				local LPHumanoid = LPCharacter and LPCharacter:FindFirstChildOfClass("Humanoid")
+				
 				LPHumanoidRootPart = LPCharacter and LPCharacter:FindFirstChild("HumanoidRootPart")
 				
 				LPHumanoidRootPart.AssemblyLinearVelocity = Vector3.new(math.huge, math.huge, math.huge)
@@ -441,7 +443,7 @@ local Commands = {
 				
 				LPHumanoidRootPart.CFrame = HumanoidRootPart.CFrame * CFrame.new(0, 0, math.random(-10, 10)) + Humanoid.MoveDirection
 				
-				if Humanoid.Health <= 0 or LocalPlayer:DistanceFromCharacter(HumanoidRootPart.Position) > 25 then
+				if (Humanoid.Health <= 0 or LPHumanoid.Health <= 0) or LocalPlayer:DistanceFromCharacter(HumanoidRootPart.Position) > 25 then
 					Connections.RunService.Fling:Disconnect()
 					
 					Connections.RunService.Fling = nil
