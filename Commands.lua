@@ -126,7 +126,7 @@ local Commands = {
 				local LPHumanoid = LPCharacter and LPCharacter:FindFirstChildOfClass("Humanoid")
 				
 				if LPHumanoid:GetState() == Enum.HumanoidStateType.Seated then
-					LPHumanoid.Jump = true
+					LPHumanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping, true)
 				end
 				
 				if LPHumanoidRootPart and HumanoidRootPart and Humanoid then
@@ -249,6 +249,12 @@ local Commands = {
 				
 				local LPHumanoidRootPart: BasePart = LPCharacter and LPCharacter:FindFirstChild("HumanoidRootPart")
 				
+				local LPHumanoid = LPCharacter and LPCharacter:FindFirstChildOfClass("Humanoid")
+
+				if LPHumanoid:GetState() == Enum.HumanoidStateType.Seated then
+					LPHumanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping, true)
+				end
+				
 				if HumanoidRootPart and LPHumanoidRootPart then
 					Rotation = Rotation + DeltaTime * RotationSpeed
 					
@@ -316,6 +322,12 @@ local Commands = {
 				local HumanoidRootPart: BasePart = Character and Character:FindFirstChild("HumanoidRootPart")
 				
 				local LPHumanoidRootPart: BasePart = LPCharacter and LPCharacter:FindFirstChild("HumanoidRootPart")
+				
+				local LPHumanoid = LPCharacter and LPCharacter:FindFirstChildOfClass("Humanoid")
+				
+				if LPHumanoid:GetState() == Enum.HumanoidStateType.Seated then
+					LPHumanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping, true)
+				end
 				
 				if HumanoidRootPart and LPHumanoidRootPart then
 					LPHumanoidRootPart.CFrame = HumanoidRootPart.CFrame * CFrame.new(2 * BotIndex, 0, 0)
