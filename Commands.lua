@@ -378,10 +378,10 @@ local Commands = {
 				return
 			end
 			
-			local BodyAngularVelocity = Instance.new("BodyAngularVelocity")
-			BodyAngularVelocity.MaxTorque = Vector3.new(0, math.huge, 0)
-			BodyAngularVelocity.AngularVelocity = Vector3.new(0, 0, 0)
-			BodyAngularVelocity.P = math.huge
+			--local BodyAngularVelocity = Instance.new("BodyAngularVelocity")
+			--BodyAngularVelocity.MaxTorque = Vector3.new(0, math.huge, 0)
+			--BodyAngularVelocity.AngularVelocity = Vector3.new(0, 0, 0)
+			--BodyAngularVelocity.P = math.huge
 			
 			workspace.Gravity = 0
 			
@@ -395,7 +395,7 @@ local Commands = {
 			
 			local LPHumanoidRootPart: BasePart = LPCharacter and LPCharacter:FindFirstChild("HumanoidRootPart")
 			
-			BodyAngularVelocity.Parent = LPHumanoidRootPart
+			--BodyAngularVelocity.Parent = LPHumanoidRootPart
 			
 			Connections.RunService.Fling = RunService.Heartbeat:Connect(function()
 				local Character = Target.Character or Target.CharacterAdded:Wait()
@@ -406,7 +406,7 @@ local Commands = {
 				
 				LPHumanoidRootPart = LPCharacter and LPCharacter:FindFirstChild("HumanoidRootPart")
 				
-				--LPHumanoidRootPart.AssemblyLinearVelocity = Vector3.new(6e6, 6e6, 6e6)
+				LPHumanoidRootPart.AssemblyLinearVelocity = Vector3.new(6e6, 6e6, 6e6)
 				--LPHumanoidRootPart.AssemblyAngularVelocity = Vector3.new(0, 6e6, 0)
 				
 				LPHumanoidRootPart.CFrame = HumanoidRootPart.CFrame * CFrame.new(0, 0, math.random(-10, 10))
