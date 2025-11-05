@@ -112,6 +112,12 @@ local Commands = {
 			
 			workspace.Gravity = 0
 			
+			for _, connection in Connections.RunService do
+				connection:Disconnect()
+				
+				connection = nil
+			end
+			
 			Connections.RunService["Swarm"] = RunService.Heartbeat:Connect(function()
 				local LPCharacter = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
 				
@@ -233,6 +239,12 @@ local Commands = {
 			
 			workspace.Gravity = 0
 			
+			for _, connection in Connections.RunService do
+				connection:Disconnect()
+
+				connection = nil
+			end
+			
 			local Speed = 1
 			local Radius = 10
 			local Spacing = Radius / #Bots
@@ -313,6 +325,12 @@ local Commands = {
 			end
 			
 			workspace.Gravity = 0
+			
+			for _, connection in Connections.RunService do
+				connection:Disconnect()
+
+				connection = nil
+			end
 			
 			Connections.RunService.Line = RunService.Heartbeat:Connect(function()
 				local Character = Target.Character or Target.CharacterAdded:Wait()
