@@ -208,7 +208,7 @@ local Commands = {
 			
 			getgenv().Data.Whitelist = Whitelist
 		end,
-	}
+	},
 	
 	orbit = {
 		Aliases = {},
