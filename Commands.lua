@@ -9,6 +9,7 @@ local FunctionsModule = loadstring(game:HttpGet("https://raw.githubusercontent.c
 
 local Data = getgenv().Data
 
+local Whitelist = Data["Whitelist"]
 local Master = Data["Master"]
 local Bots = Data["Bots"]
 
@@ -183,6 +184,31 @@ local Commands = {
 			LocalPlayer.Character:FindFirstChildOfClass("Humanoid").Health = 0
 		end,
 	},
+	
+	whitelist = {
+		Aliases = {"wl", "white"},
+		
+		Args = {"player", "botindex"},
+		
+		Definition = "Allows a list of users to control the bots",
+		
+		Run = function(Runner: Player, Data)
+			local PlayerToWhitelist: Player = Data.player
+			local BotIndex = Data.botindex
+			
+			if table.find(Whitelist, PlayerToWhitelist.Name) then
+				table.remove(Whitelist, table.find(Whitelist, PlayerToWhitelist.Name))
+				
+				FunctionsModule.Chat(1, BotIndex, PlayerToWhitelist.Name.." you have been REMOVED from the whitelist to control us")
+			else
+				table.insert(Whitelist, PlayerToWhitelist.Name)
+				
+				FunctionsModule.Chat(1, BotIndex, PlayerToWhitelist.Name.." you have been ADDED to the whitelist to control us! Use .cmds to see current commands (cmds not working yet)")
+			end
+			
+			getgenv().Data.Whitelist = Whitelist
+		end,
+	}
 	
 	orbit = {
 		Aliases = {},
