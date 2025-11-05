@@ -440,6 +440,14 @@ local Commands = {
 				LPHumanoidRootPart.AssemblyAngularVelocity = Vector3.new(0, 99999, 0)
 				
 				LPHumanoidRootPart.CFrame = HumanoidRootPart.CFrame * CFrame.new(0, 0, math.random(-10, 10)) + Humanoid.MoveDirection
+				
+				if Humanoid.Health <= 0 or (LPHumanoidRootPart.Position - HumanoidRootPart.Position).Magnitude > 50 then
+					Connections.RunService.Fling:Disconnect()
+					
+					Connections.RunService.Fling = nil
+					
+					return
+				end
 			end)
 		end,
 	}
