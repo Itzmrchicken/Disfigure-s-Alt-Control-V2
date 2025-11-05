@@ -356,6 +356,28 @@ local Commands = {
 		end,
 	},
 	
+	count = {
+		Aliases = {"coff", "cnt"},
+		
+		Args = {"none", "botindex"},
+		
+		Definition = "Makes each bot count off their number",
+		
+		Run = function(Runner: Player, Data)
+			local BotIndex = Data.botindex
+			
+			for i, _ in Bots do
+				if i == BotIndex then
+					FunctionsModule.Chat(i, BotIndex, "I'm number "..BotIndex.."!")
+					
+					break
+				end
+			end
+			
+			FunctionsModule.Chat(1, BotIndex, "Looks like everyone counted off right!")
+		end,
+	},
+	
 	fling = {
 		Aliases = {"skyrocket", "moon"},
 		
