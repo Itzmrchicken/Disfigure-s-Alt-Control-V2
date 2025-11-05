@@ -95,15 +95,21 @@ function debug_style(Type: string, FunctionName: string, ...)
 end
 
 function verify_all_bots()
+	local NewBots = {}
+	
 	for _, bot in Bots do
-		if not PlayersService:FindFirstChild(bot) then
-			table.remove(Bots, table.find(Bots, bot))
-			
+		if PlayersService:FindFirstChild(bot) then
+			table.insert(NewBots, bot)
+		else
 			warn(debug_style("WARN", "main() => verify_all_bots()", bot.." doesn't exist in-game"))
 		end
 	end
 	
-	BotIndex = not AccountIsMaster and table.find(Bots, LocalPlayer.Name)
+	BotIndex = not AccountIsMaster and table.find(NewBots, LocalPlayer.Name)
+	
+	Bots = NewBots
+	
+	getgenv().Data.Bots = NewBots
 end
 
 function account_master()
