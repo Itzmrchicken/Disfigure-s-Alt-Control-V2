@@ -114,6 +114,12 @@ local Commands = {
 				
 				local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
 				
+				local LPHumanoid = LPCharacter and LPCharacter:FindFirstChildOfClass("Humanoid")
+				
+				if LPHumanoid:GetState() == Enum.HumanoidStateType.Seated then
+					LPHumanoid.Jump = true
+				end
+				
 				if LPHumanoidRootPart and HumanoidRootPart and Humanoid then
 					LPHumanoidRootPart.CFrame = HumanoidRootPart.CFrame * CFrame.new(Humanoid.MoveDirection) * CFrame.new(math.random(-15, 15), math.random(-15, 15), math.random(-15, 15))
 				end
