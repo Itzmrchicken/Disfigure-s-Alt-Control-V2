@@ -10,6 +10,7 @@ local Data = getgenv().Data
 local FunctionsModule = loadstring(game:HttpGet("https://raw.githubusercontent.com/Itzmrchicken/Disfigure-s-Alt-Control-V2/refs/heads/main/functions.lua"))()
 local CommandsModule = loadstring(game:HttpGet("https://raw.githubusercontent.com/Itzmrchicken/Disfigure-s-Alt-Control-V2/refs/heads/main/Commands.lua"))()
 
+local Whitelist = Data["Whitelist"]
 local Master = Data["Master"]
 local Prefix = Data["Prefix"]
 local Bots = Data["Bots"]
@@ -222,7 +223,9 @@ return function()
 	TextChatService.MessageReceived:Connect(function(message)
 		local PlayerMessage: Player = PlayersService:FindFirstChild(message.TextSource.Name)
 		
-		if IsDisplayName and PlayerMessage.DisplayName == Master or PlayerMessage.Name == Master then
+		Whitelist = getgenv().Data.Whitelist
+		
+		if (IsDisplayName and PlayerMessage.DisplayName == Master or PlayerMessage.Name == Master) or (table.find(Whitelist, PlayerMessage.Name) or table.find(Whitelist, PlayerMessage.DisplayName)) then
 			print(debug_style("INFO", "main() => MessageReceived", message.Text))
 			
 			register_command(PlayerMessage, message.Text)
