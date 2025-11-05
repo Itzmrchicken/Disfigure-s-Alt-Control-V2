@@ -136,7 +136,7 @@ local Commands = {
 				end
 				
 				if LPHumanoidRootPart and HumanoidRootPart and Humanoid then
-					LPHumanoidRootPart.CFrame = HumanoidRootPart.CFrame * CFrame.new(Humanoid.MoveDirection) * CFrame.new(math.random(-15, 15), math.random(-15, 15), math.random(-15, 15))
+					LPHumanoidRootPart.CFrame = HumanoidRootPart.CFrame * CFrame.new(math.random(-15, 15), math.random(-15, 15), math.random(-15, 15)) + Humanoid.MoveDirection
 				end
 			end)
 		end,
@@ -339,6 +339,8 @@ local Commands = {
 				
 				local HumanoidRootPart: BasePart = Character and Character:FindFirstChild("HumanoidRootPart")
 				
+				local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
+				
 				local LPHumanoidRootPart: BasePart = LPCharacter and LPCharacter:FindFirstChild("HumanoidRootPart")
 				
 				local LPHumanoid = LPCharacter and LPCharacter:FindFirstChildOfClass("Humanoid")
@@ -348,7 +350,7 @@ local Commands = {
 				end
 				
 				if HumanoidRootPart and LPHumanoidRootPart then
-					LPHumanoidRootPart.CFrame = HumanoidRootPart.CFrame * CFrame.new(2 * BotIndex, 0, 0)
+					LPHumanoidRootPart.CFrame = HumanoidRootPart.CFrame * CFrame.new(2 * BotIndex, 0, 0) + Humanoid.MoveDirection
 				end
 			end)
 		end,
@@ -404,12 +406,14 @@ local Commands = {
 				
 				local HumanoidRootPart: BasePart = Character and Character:FindFirstChild("HumanoidRootPart")
 				
+				local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
+				
 				LPHumanoidRootPart = LPCharacter and LPCharacter:FindFirstChild("HumanoidRootPart")
 				
 				LPHumanoidRootPart.AssemblyLinearVelocity = Vector3.new(math.huge, math.huge, math.huge)
 				LPHumanoidRootPart.AssemblyAngularVelocity = Vector3.new(0, 99999, 0)
 				
-				LPHumanoidRootPart.CFrame = HumanoidRootPart.CFrame * CFrame.new(0, 0, math.random(-10, 10))
+				LPHumanoidRootPart.CFrame = HumanoidRootPart.CFrame * CFrame.new(0, 0, math.random(-10, 10)) + Humanoid.MoveDirection
 			end)
 		end,
 	}
