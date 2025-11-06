@@ -219,7 +219,7 @@ local Commands = {
 	orbit = {
 		Aliases = {},
 		
-		Args = {"player", "botindex"},
+		Args = {"player", "number", "number", "botindex"},
 		
 		Definition = "Makes the bots orbit a provided player",
 		
@@ -245,8 +245,8 @@ local Commands = {
 				connection = nil
 			end
 			
-			local Speed = 1
-			local Radius = 10
+			local Speed = Data.number or 1
+			local Radius = Data.number1 or 10
 			local Spacing = Radius / #Bots
 			
 			local Rotation = 0
@@ -379,6 +379,34 @@ local Commands = {
 			task.wait(1)
 			
 			FunctionsModule.Chat(1, BotIndex, "Looks like everyone counted off right!")
+		end,
+	},
+	
+	tool = {
+		Aliases = {"equip", "t"},
+		
+		Args = {"word"},
+		
+		Definition = "Equipes / de-equips a provided name",
+		
+		Run = function(Runner: Player, Data)
+			local ToolName = Data.word
+			
+			local LPCharacter = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+			
+			local LPHumanoid = LPCharacter and LPCharacter:FindFirstChildOfClass("Humanoid")
+			
+			local Tool: Tool = LPCharacter:FindFirstChild(ToolName) or LocalPlayer.Backpack:FindFirstChild(ToolName)
+			
+			local IsEquipped = LPCharacter:FindFirstChild(ToolName)
+			
+			if Tool then
+				if IsEquipped then
+					LPHumanoid:UnequipTools()
+				else
+					LPHumanoid:EquipTool(Tool)
+				end
+			end
 		end,
 	},
 	
