@@ -227,6 +227,8 @@ return function()
 	UserSettings():GetService("UserGameSettings").MasterVolume = 0
 	UserSettings().GameSettings.SavedQualityLevel = Enum.SavedQualitySetting.QualityLevel1
 	
+	setfpscap(60)
+	
 	--UserSettings().GameSettings.StartMaximized = false
 	--UserSettings().GameSettings.MaxQuality = true
 		
