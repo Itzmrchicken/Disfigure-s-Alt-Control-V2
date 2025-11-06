@@ -149,9 +149,9 @@ function grab_args(Runner: Player, Command: string, Arguments, Data)
 					print(SameName)
 					
 					CmdArgs[Arg..SameName] = ArgumentData
+				else
+					CmdArgs[Arg] = ArgumentData
 				end
-				
-				CmdArgs[Arg] = ArgumentData
 			else
 				warn(debug_style("WARN", "grab_args()", IsError and ArgumentData))
 				
