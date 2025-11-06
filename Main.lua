@@ -137,6 +137,18 @@ function grab_args(Runner: Player, Command: string, Arguments, Data)
 			})
 			
 			if ArgumentData and not IsError then
+				if CmdArgs[Arg] then
+					local SameName = 0
+					
+					for _, name in ipairs(CmdArgs) do
+						if name == Arg then
+							SameName += 1
+						end
+					end
+					
+					CmdArgs[Arg..SameName] = ArgumentData
+				end
+				
 				CmdArgs[Arg] = ArgumentData
 			else
 				warn(debug_style("WARN", "grab_args()", IsError and ArgumentData))
