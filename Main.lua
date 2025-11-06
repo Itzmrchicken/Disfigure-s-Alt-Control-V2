@@ -146,6 +146,8 @@ function grab_args(Runner: Player, Command: string, Arguments, Data)
 						end
 					end
 					
+					print(SameName)
+					
 					CmdArgs[Arg..SameName] = ArgumentData
 				end
 				
